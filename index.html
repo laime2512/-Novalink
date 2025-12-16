@@ -12,6 +12,7 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
+	
 	<body class="landing is-preload">
 
 		<!-- Page Wrapper -->
@@ -39,17 +40,16 @@
 				<!-- Banner -->
 					<section id="banner">
 						<div class="inner">
-							<h2>Ventas360</h2>
-							<p>Suite Integral de Gestión Comercial, Logística y CRM Georreferenciado.<br />
-							
-							<br />
-							Desarrollado por <a href="http://html5up.net">Novalink</a>.</p>
+							<h2>Novalink</h2><br />
+							<img src="images/logo.png" alt="Novalink Ventas360" style="width: 200px; height: auto;" />
+							<h4>Suite Integral de Gestión Comercial,<br />Logística y CRM Georreferenciado<br /></h4>
+							<p>Contactanos con <a href="formulario.html">Novalink</a>.</p>
 							<ul class="actions special">
 								<!-- <li><a href="https://wa.me/59174054547" class="button fit icon brands fa-whatsapp">74054547</a></li>-->
 								<li><a href="https://wa.me/59174054547" class="button primary button fit icon brands fa-whatsapp">74054547</a></li>
 							</ul>
 						</div>
-						<a href="#one" class="more scrolly">¿Qué es Ventas360?</a>
+						<!-- <a href="#one" class="more scrolly">¿Qué es Ventas360?</a>-->
 					</section>
 
 				<!-- One -->
@@ -191,6 +191,85 @@ Desde la preventa hasta la entrega final y la satisfacción del cliente, Ventas3
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+<!-- Formulario Modal Flotante -->
+<div id="novalinkModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Solicitar Demo / Cotización</h3>
+            <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <p>Déjanos tus datos y un asesor experto en logística te contactará.</p>
+            
+            <form id="formNovalink" action="procesar_lead.php" method="POST">
+                <div class="form-group">
+                    <label for="empresa">Nombre de la Empresa / Negocio *</label>
+                    <input type="text" id="empresa" name="empresa" required>
+                </div>
 
+                <div class="form-group">
+                    <label for="contacto">Nombre de Contacto *</label>
+                    <input type="text" id="contacto" name="contacto" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Correo Electrónico *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefono">Celular/Whatsapp *</label>
+                    <input type="tel" id="telefono" name="telefono" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mensaje">¿Qué necesidad principal buscas resolver?</label>
+                    <textarea id="mensaje" name="mensaje" rows="3"></textarea>
+                </div>
+
+                <button type="submit" class="button primary fit">ENVIAR SOLICITUD</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+// Script para manejar el modal
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. Encontrar el enlace "Contactanos con Novalink"
+    const contactLink = document.querySelector('p a[href="formulario.html"]');
+    
+    if (contactLink) {
+        // 2. Prevenir navegación y abrir modal
+        contactLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('novalinkModal').style.display = 'flex';
+        });
+        
+        // 3. Actualizar texto del enlace para mantener consistencia
+        contactLink.href = '#';
+    }
+    
+    // 4. Cerrar modal con la X
+    document.querySelector('.close-modal').addEventListener('click', function() {
+        document.getElementById('novalinkModal').style.display = 'none';
+    });
+    
+    // 5. Cerrar modal haciendo clic fuera del contenido
+    window.addEventListener('click', function(e) {
+        const modal = document.getElementById('novalinkModal');
+        if (e.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+    
+    // 6. Manejar envío del formulario (opcional: validación adicional)
+    document.getElementById('formNovalink').addEventListener('submit', function(e) {
+        // Aquí puedes agregar validación adicional si necesitas
+        console.log('Formulario enviándose...');
+        // El envío real lo hace el action="procesar_lead.php"
+    });
+});
+</script>
 	</body>
 </html>
