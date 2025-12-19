@@ -3998,8 +3998,13 @@ input, select, textarea {
 		background-color: #263F73;
 	}
 
-	/* ESTILOS PARA EL MODAL FLOTANTE */
-.modal {
+	/* ============================================
+   ESTILOS PARA MODAL FLOTANTE - VERSIÓN CORREGIDA
+   Compatible con template Novalink
+   ============================================ */
+
+/* Modal base - NO afecta otros elementos */
+#novalinkModal.modal {
     display: none;
     position: fixed;
     z-index: 10000;
@@ -4007,138 +4012,208 @@ input, select, textarea {
     top: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.85);
     justify-content: center;
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
 }
 
-.modal-content {
+/* Contenido del modal */
+#novalinkModal .modal-content {
     background-color: #267365;
-    border-radius: 8px;
+    border-radius: 12px;
     width: 100%;
-    max-width: 500px;
+    max-width: 520px;
     max-height: 90vh;
     overflow-y: auto;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
-    animation: modalFadeIn 0.3s;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    animation: modalSlideIn 0.4s ease-out;
+    border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-@keyframes modalFadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes modalSlideIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(40px) scale(0.98); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1); 
+    }
 }
 
-.modal-header {
-    background: linear-gradient(135deg, #0056b3 0%, #003d82 100%);
-    color: #263F73;
-    padding: 20px;
-    border-radius: 8px 8px 0 0;
+/* Header del modal */
+#novalinkModal .modal-header {
+    background: linear-gradient(135deg, #0056b3 0%, #0d47a1 100%);
+    color: #ffffff;
+    padding: 25px 30px;
+    border-radius: 12px 12px 0 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
-.modal-header h3 {
+#novalinkModal .modal-header h3 {
     margin: 0;
-    font-size: 1.4em;
+    font-size: 1.5em;
+    font-weight: 600;
+    color: #ffffff !important; /* Forzar color blanco */
 }
 
-.close-modal {
-    font-size: 28px;
-    font-weight: bold;
+#novalinkModal .close-modal {
+    font-size: 32px;
+    font-weight: 300;
     cursor: pointer;
     line-height: 1;
-    transition: color 0.3s;
+    transition: all 0.3s ease;
+    color: #ffffff;
+    opacity: 0.8;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.2);
 }
 
-.close-modal:hover {
-    color: #ffdddd;
+#novalinkModal .close-modal:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.3);
+    transform: rotate(90deg);
 }
 
-.modal-body {
-    padding: 25px;
+/* Cuerpo del modal */
+#novalinkModal .modal-body {
+    padding: 30px;
 }
 
-.modal-body p {
+#novalinkModal .modal-body > p {
     text-align: center;
-    margin-bottom: 20px;
-    color: #F2F2F2;
-    font-size: 0.95em;
+    margin-bottom: 25px;
+    color: #e0f7fa;
+    font-size: 1em;
+    line-height: 1.6;
 }
 
-/* Estilos del formulario */
-.form-group {
-    margin-bottom: 20px;
+/* ===== ESTILOS ESPECÍFICOS PARA INPUTS ===== */
+/* Esto NO afecta otros inputs de la página */
+#novalinkModal .form-group {
+    margin-bottom: 24px;
 }
 
-.form-group label {
+#novalinkModal .form-group label {
     display: block;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-weight: 600;
-    color: #F2F2F2;
-    font-size: 0.9em;
+    color: #f2f2f2;
+    font-size: 0.95em;
+    letter-spacing: 0.3px;
 }
 
-.form-group input,
-.form-group textarea {
+/* Inputs específicos del modal */
+#novalinkModal .form-group input,
+#novalinkModal .form-group textarea {
     width: 100%;
-    padding: 12px 15px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px; /* Mejor para móviles */
+    padding: 14px 18px;
+    background-color: #ffffff !important; /* Fondo blanco */
+    border: 2px solid #c9e9ff;
+    border-radius: 8px;
+    font-size: 16px;
     box-sizing: border-box;
-    transition: border-color 0.3s;
+    transition: all 0.3s ease;
+    color: #333333 !important; /* Texto oscuro */
+    font-family: inherit;
 }
 
-.form-group input:focus,
-.form-group textarea:focus {
+/* Placeholder visible */
+#novalinkModal .form-group input::placeholder,
+#novalinkModal .form-group textarea::placeholder {
+    color: #666666;
+    opacity: 0.8;
+}
+
+/* Estados de foco */
+#novalinkModal .form-group input:focus,
+#novalinkModal .form-group textarea:focus {
     outline: none;
-    border-color: #0056b3;
-    box-shadow: 0 0 0 2px rgba(0, 86, 179, 0.2);
+    border-color: #4dabf7;
+    box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.3);
+    background-color: #ffffff !important;
 }
 
-.form-group textarea {
+/* Textarea específico */
+#novalinkModal .form-group textarea {
     resize: vertical;
-    min-height: 100px;
+    min-height: 110px;
+    line-height: 1.5;
 }
 
-/* Responsive para móviles */
+/* ===== BOTÓN MEJORADO ESPECÍFICO DEL MODAL ===== */
+
+/* ===== RESPONSIVE ===== */
 @media screen and (max-width: 600px) {
-    .modal-content {
-        max-width: 95%;
-        margin: 10px;
-    }
-    
-    .modal-header {
+    #novalinkModal.modal {
         padding: 15px;
     }
     
-    .modal-body {
+    #novalinkModal .modal-content {
+        max-width: 100%;
+        border-radius: 10px;
+    }
+    
+    #novalinkModal .modal-header {
         padding: 20px;
     }
     
-    .modal-header h3 {
-        font-size: 1.2em;
+    #novalinkModal .modal-header h3 {
+        font-size: 1.3em;
     }
     
-    .form-group input,
-    .form-group textarea {
-        padding: 10px 12px;
-        font-size: 16px; /* Importante para zoom en móviles */
+    #novalinkModal .modal-body {
+        padding: 20px;
+    }
+    
+    #novalinkModal .form-group {
+        margin-bottom: 20px;
+    }
+    
+    #novalinkModal .form-group input,
+    #novalinkModal .form-group textarea {
+        padding: 12px 15px;
+        font-size: 16px;
+    }
+    
+    #novalinkModal .close-modal {
+        font-size: 28px;
+        width: 36px;
+        height: 36px;
     }
 }
 
-/* Para tablets */
-@media screen and (max-width: 768px) {
-    .modal-content {
-        max-width: 90%;
+@media screen and (max-width: 768px) and (min-width: 601px) {
+    #novalinkModal .modal-content {
+        max-width: 85%;
     }
 }
 
-/* Integración con el botón existente */
-.button.primary.fit {
-    width: 100%;
-    margin-top: 10px;
+/* Scrollbar personalizado solo para este modal */
+#novalinkModal .modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+#novalinkModal .modal-content::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+#novalinkModal .modal-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+#novalinkModal .modal-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.4);
 }
