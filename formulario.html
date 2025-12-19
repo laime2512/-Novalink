@@ -1,12 +1,12 @@
 <!DOCTYPE HTML>
 <!--
-	Novalink by HTML5 UP
+	Spectral by HTML5 UP
 	html5up.net | @ajlkn
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
 	<head>
-		<title>Formulario - Novalink </title>
+		<title>Solicitar Demo - Novalink</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -26,15 +26,18 @@
 									<a href="#menu" class="menuToggle"><span>Menu</span></a>
 									<div id="menu">
 										<ul>
-											<li><a href="index.html">Inicio</a></li>
-											<li><a href="generic.html">Business</a></li>
-											<li><a href="formulario.html">Contacto</a></li>
+											<li><a href="index.html">Home</a></li>
+											<li><a href="generic.html">Servicios</a></li>
+											<li><a href="elements.html">Características</a></li>
+											<li><a href="formulario.html">Solicitar Demo</a></li>
+											<li><a href="#">Contacto</a></li>
 										</ul>
 									</div>
 								</li>
 							</ul>
 						</nav>
 					</header>
+
 				<!-- Main -->
 					<article id="main">
 						<header>
@@ -44,9 +47,14 @@
 						<section class="wrapper style5">
 							<div class="inner">
 
+								<!-- Mensaje de estado -->
+								<div id="message-container" style="display: none;">
+									<div class="box" id="message-box"></div>
+								</div>
+
 								<section>
 									<div class="box" style="max-width: 800px; margin: 0 auto;">
-										<form id="formNovalink" method="post" action="procesar_lead.php">
+										<form id="formNovalink" method="POST">
 											<div class="row gtr-uniform">
 												
 												<!-- Nombre de la Empresa -->
@@ -72,7 +80,7 @@
 													<input type="tel" name="telefono" id="telefono" placeholder="+52 123 456 7890" required />
 												</div>
 												
-												<!-- Área de interés 
+												<!-- Área de interés -->
 												<div class="col-12">
 													<label for="interes">Área de interés principal</label>
 													<select name="interes" id="interes">
@@ -84,14 +92,14 @@
 														<option value="otros">Otros</option>
 													</select>
 												</div>
-												-->
+												
 												<!-- Mensaje -->
 												<div class="col-12">
 													<label for="mensaje">¿Qué necesidad principal buscas resolver?</label>
 													<textarea name="mensaje" id="mensaje" placeholder="Describe brevemente tus necesidades logísticas..." rows="4"></textarea>
 												</div>
 												
-												<!-- Tipo de consulta 
+												<!-- Tipo de consulta -->
 												<div class="col-12">
 													<p style="margin-bottom: 10px;">Tipo de consulta:</p>
 													<div class="col-4 col-12-small">
@@ -107,18 +115,21 @@
 														<label for="consulta-informacion">Información General</label>
 													</div>
 												</div>
-												-->
-												<!-- Checkbox de consentimiento 
+												
+												<!-- Origen del lead (oculto) -->
+												<input type="hidden" id="origen" name="origen" value="formulario_web_novalink">
+												
+												<!-- Checkbox de consentimiento -->
 												<div class="col-12">
 													<input type="checkbox" id="privacidad" name="privacidad" required>
 													<label for="privacidad">Acepto la <a href="#" style="text-decoration: underline;">Política de Privacidad</a> y autorizo el contacto *</label>
 												</div>
-												-->
+												
 												<!-- Botones -->
 												<div class="col-12">
 													<ul class="actions" style="justify-content: center;">
-														<li><input type="submit" value="ENVIAR SOLICITUD" class="primary" /></li>
-														<li><input type="reset" value="LIMPIAR FORMULARIO" /></li>
+														<li><button type="submit" class="button primary" id="submit-btn">ENVIAR SOLICITUD</button></li>
+														<li><button type="reset" class="button">LIMPIAR FORMULARIO</button></li>
 													</ul>
 												</div>
 												
@@ -158,12 +169,14 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="icons">
-							<li><a href="https://wa.me/59174054547" target="_blank" class="icon brands fa-whatsapp"><span class="label">WhatsApp</span></a></li>
-							<li><a href="tel:+591422765985" class="icon solid fa-phone"><span class="label">Teléfono</span></a></li>
-							<li><a href="http://www.novalink.com.bo" target="_blank" class="icon solid fa-globe"><span class="label">Sitio Web</span></a></li>
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
+							<li><a href="#" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
 						</ul>
 						<ul class="copyright">
-							<li>Copyright ©2025</li><li>Design |<a href="www.novalink.com.bo"> NOVALINK</a></li>
+							<li>&copy; Novalink 2025</li><li>Soluciones Logísticas Inteligentes</li>
 						</ul>
 					</footer>
 
@@ -178,44 +191,8 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 			
-			<!-- Script personalizado para el formulario -->
-			<script>
-				$(document).ready(function() {
-					// Validación adicional del formulario
-					$('#formNovalink').submit(function(e) {
-						var telefono = $('#telefono').val();
-						var email = $('#email').val();
-						
-						// Validación básica de email
-						var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-						if (!emailRegex.test(email)) {
-							alert('Por favor, ingresa un correo electrónico válido.');
-							e.preventDefault();
-							return false;
-						}
-						
-						// Validación básica de teléfono (al menos 10 dígitos)
-						var telefonoRegex = /\d{10,}/;
-						if (!telefonoRegex.test(telefono.replace(/\D/g, ''))) {
-							alert('Por favor, ingresa un número de teléfono válido (al menos 10 dígitos).');
-							e.preventDefault();
-							return false;
-						}
-						
-						// Si todo está bien, se envía el formulario
-						return true;
-					});
-					
-					// Formateo automático del teléfono
-					$('#telefono').on('input', function() {
-						var value = $(this).val().replace(/\D/g, '');
-						if (value.length > 10) {
-							value = value.substring(0, 10);
-						}
-						$(this).val(value);
-					});
-				});
-			</script>
+			<!-- Script para conexión a API Dolibarr -->
+			<script src="assets/js/api-dolibarr.js"></script>
 
 	</body>
 </html>
